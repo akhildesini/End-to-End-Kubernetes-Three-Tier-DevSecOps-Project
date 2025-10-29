@@ -1,7 +1,6 @@
 pipeline {
     agent any 
     tools {
-        jdk 'jdk'
         nodejs 'nodejs'
     }
     environment  {
@@ -40,6 +39,7 @@ pipeline {
                 }
             }
         }
+/*
         stage('OWASP Dependency-Check Scan') {
             steps {
                 dir('Application-Code/frontend') {
@@ -48,6 +48,7 @@ pipeline {
                 }
             }
         }
+*/
         stage('Trivy File Scan') {
             steps {
                 dir('Application-Code/frontend') {
@@ -82,13 +83,13 @@ pipeline {
         }
         stage('Checkout Code') {
             steps {
-                git credentialsId: 'GITHUB', url: 'https://github.com/AmanPathak-DevOps/End-to-End-Kubernetes-Three-Tier-DevSecOps-Project.git'
+                git credentialsId: 'GITHUB', url: 'https://github.com/akhildesini/End-to-End-Kubernetes-Three-Tier-DevSecOps-Project.git'
             }
         }
         stage('Update Deployment file') {
             environment {
                 GIT_REPO_NAME = "End-to-End-Kubernetes-Three-Tier-DevSecOps-Project"
-                GIT_USER_NAME = "AmanPathak-DevOps"
+                GIT_USER_NAME = "akhildesini"
             }
             steps {
                 dir('Kubernetes-Manifests-file/Frontend') {
